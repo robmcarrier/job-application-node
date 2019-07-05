@@ -5,6 +5,7 @@ var express = require('express'),
     createError = require('http-errors'),
     path = require('path'),
     indexRouter = require('./routes/index'),
+    bodyParser = require('body-parser'),
     jobApplicationRouter = require('./routes/jobApplications');
 
 var app = express();
@@ -18,15 +19,19 @@ db.on('error', console.error.bind(console, 'MongoDB connection error'));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+app.use(express.static('public'));
+
 // JobApplication.create({company: 'test', jobTitle: 'Test Position', status: "Submitted"},
 //     function (err, jobApplication) {
 //         if (err) return new Error(err);
 //     });
 
-JobApplication.findOne({}).exec(function (err, jobApplications) {
-    if (err) createError(err);
-    console.log(jobApplications.jobTitle);
-});
+// JobApplication.findOne({}).exec(function (err, jobApplications) {
+//     if (err) createError(err);
+//     console.log(jobApplications.jobTitle);
+// });
 
 const myLogger = function (req, res, next) {
     console.log("Request IP: " + req.ip);

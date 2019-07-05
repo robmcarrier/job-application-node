@@ -7,7 +7,7 @@ var jobApplicationSchema = new Schema({
     jobTitle: String,
     status: {
         type: String,
-        enum: ['Submitted', 'Not Submitted', 'Replied - No', 'Replied - Yes',]
+        enum: ['Submitted', 'Not Submitted', 'Replied - Declined', 'Replied - Accepted',]
     }
 });
 

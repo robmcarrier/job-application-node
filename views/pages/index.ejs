@@ -1,9 +1,31 @@
 <html>
 <head>
-    <title>Index</title>
+    <title>Job Applications</title>
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.css">
 </head>
 <body>
-    <h1>Index</h1>
-    <h1><%= title %></h1>
+<h1>Job Applications</h1>
+
+<div>
+    <table class="table">
+        <thead>
+            <tr></tr>
+        </thead>
+        <% for(var i = 0; i < jobApplications.length; i++) { %>
+        <tr>
+            <td ><p id="company_<%= i %>"><%= jobApplications[i].company %></p></td>
+            <td id="jobTitle_<%= i %>"><%= jobApplications[i].jobTitle %></td>
+            <td><%= jobApplications[i].status%></td>
+            <td><a class="btn btn-primary edit" href="#" id="edit_<%=i%>" class="edit">Edit</a></td>
+            <td><a class="btn btn-danger" href="/jobApplications/delete/<%= jobApplications[i]._id%>">Delete</a></a> </td>
+        </tr>
+        <% } %>
+    </table>
+</div>
+<br />
+<a href="/jobApplications/new">New Job Application</a>
+
 </body>
+<script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="/js/jquery.index.js"></script>
 </html>
