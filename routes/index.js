@@ -20,9 +20,23 @@ router.get('/', function (req, res, next) {
 router.post('/new', function (req, res) {
     JobApplication.create({company: req.body.company, jobTitle: req.body.jobTitle, status: 'Submitted'},
         function (err, jobApplication) {
-        if (err) return new Error(err);
-        res.redirect('/');
-    });
+            if (err) return new Error(err);
+            res.redirect('/');
+        });
+});
+
+router.post('/edit', function (req, res) {
+    let query = {'_id': req.body._id};
+
+    JobApplication.findOneAndUpdate(query,
+        {
+            company: req.body.company,
+            jobTitle: req.body.jobTitle,
+            status: req.body.status
+        }, {upsert:true}, function (err, jobApplication) {
+            if (err) return new Error(err);
+            res.redirect('/');
+        });
 });
 
 router

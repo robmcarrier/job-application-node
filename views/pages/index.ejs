@@ -1,28 +1,55 @@
 <html>
 <head>
     <title>Job Applications</title>
+    <link type="text/css" rel="stylesheet" href="/css/style.css">
     <link type="text/css" rel="stylesheet" href="/css/bootstrap.css">
+
 </head>
 <body>
 <h1>Job Applications</h1>
 
 <div>
-    <table class="table">
-        <thead>
-            <tr></tr>
-        </thead>
-        <% for(var i = 0; i < jobApplications.length; i++) { %>
-        <tr>
-            <td ><p id="company_<%= i %>"><%= jobApplications[i].company %></p></td>
-            <td id="jobTitle_<%= i %>"><%= jobApplications[i].jobTitle %></td>
-            <td><%= jobApplications[i].status%></td>
-            <td><a class="btn btn-primary edit" href="#" id="edit_<%=i%>" class="edit">Edit</a></td>
-            <td><a class="btn btn-danger" href="/jobApplications/delete/<%= jobApplications[i]._id%>">Delete</a></a> </td>
-        </tr>
+    <div class="table table-style">
+        <div class="thead">
+            <div class="tr">
+                <div class="td">Company</div>
+                <div class="td">Job Title</div>
+                <div class="td">Status</div>
+                <div class="td"></div>
+                <div class="td"></div>
+            </div>
+        </div>
+        <div class="tbody">
+            <% for(var i = 0; i < jobApplications.length; i++) { %>
+                <form class="tr" id="form_<%= jobApplications[i]._id %>" method="post" action="/edit">
+                    <div class="td"><p id="company_<%= jobApplications[i]._id %>"><%= jobApplications[i].company %></p>
+                    </div>
+                    <div class="td"><p
+                                id="jobTitle_<%= jobApplications[i]._id %>"><%= jobApplications[i].jobTitle %></p></div>
+                    <input type="hidden" id="custId" name="_id" value="<%= jobApplications[i]._id%>">
+                    <div class="td">
+                        <div id="status_<%= jobApplications[i]._id %>"><%= jobApplications[i].status %></div>
+                        <div id="status_dropdown_div_<%= jobApplications[i]._id %>" class="hideDropdown">
+                            <select id="status_dropdown_<%= jobApplications[i]._id%>" form="form_<%= jobApplications[i]._id%>" name="status">
+                                <option value="Submitted">Submitted</option>
+                                <option value="Not Submitted">Not Submitted</option>
+                                <option value="Replied - Declined">Replied - Declined</option>
+                                <option value="Replied - Accepted">Replied - Accepted</option>
+                            </select>
+                        </div>
+        </div>
+        <div class="td">
+            <button class="edit" type="button" onclick="edit(this);" id="edit_<%= jobApplications[i]._id %>">Edit
+            </button>
+            <button class="save hideDropdown" type="submit" id="save_<%= jobApplications[i]._id%>">Save</button>
+        </div>
+        <div class="td"><a class="btn btn-danger delete" href="/jobApplications/delete/<%= jobApplications[i]._id %>">Delete</a></div>
+        </form>
         <% } %>
-    </table>
+    </div>
 </div>
-<br />
+</div>
+<br/>
 <a href="/jobApplications/new">New Job Application</a>
 
 </body>
