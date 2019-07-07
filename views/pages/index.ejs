@@ -26,7 +26,9 @@
         </div>
         <div class="tbody">
             <% for(var i = 0; i < jobApplications.length; i++) { %>
-                <form class="tr" id="form_<%= jobApplications[i]._id %>" method="post" action="/edit">
+                <% let classArray = [jobApplications[i].rowClass] %>
+                <% ((i % 2 != 0) ? classArray.push("odd") : null); %>
+                <form class="tr <%=classArray.join(" ")%>" id="form_<%= jobApplications[i]._id %>" method="post" action="/edit">
                     <div class="td"><p id="company_<%= jobApplications[i]._id %>"><%= jobApplications[i].company %></p>
                     </div>
                     <div class="td"><p

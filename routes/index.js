@@ -9,6 +9,13 @@ router.get('/', function (req, res, next) {
         if (err) {
             console.log(err);
         } else {
+            let jobAppArray = [];
+            let declinedArray = [];
+            for (let i = 0; i < jobApplications.length; i++) {
+                jobApplications[i].status === "Replied - Declined" ? declinedArray.push(jobApplications[i]) : jobAppArray.push(jobApplications[i]);
+            }
+            console.log(declinedArray);
+            jobApplications = jobAppArray.concat(declinedArray);
             res.render('pages/index', {
                 jobApplications: jobApplications
             });
@@ -18,7 +25,8 @@ router.get('/', function (req, res, next) {
 
 router.post('/new', function (req, res) {
     JobApplication.create(
-        {company: req.body.company,
+        {
+            company: req.body.company,
             jobTitle: req.body.jobTitle,
             status: 'Submitted',
             submittedDate: req.body.submittedDate,
@@ -38,7 +46,7 @@ router.post('/edit', function (req, res) {
             jobTitle: req.body.jobTitle,
             status: req.body.status,
             submittedDate: req.body.submittedDate
-        }, {upsert:true}, function (err, jobApplication) {
+        }, {upsert: true}, function (err, jobApplication) {
             if (err) return new Error(err);
             res.redirect('/');
         });

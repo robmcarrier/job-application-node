@@ -31,3 +31,24 @@
 {
     display: none;
 }
+
+.odd
+{
+    background-color: lightgrey;
+}
+
+.submitted
+{
+
+}
+
+.declined
+{
+    background-color: #e7483e;
+    text-decoration: line-through;
+}
+
+.declined.odd
+{
+    background-color: #b3332e;
+}
