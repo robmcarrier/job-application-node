@@ -1,8 +1,6 @@
 var express = require('express'),
     ds = require('./dateModule.js'),
-    JobApplication = require('./models/jobApplication'),
     mongoose = require('mongoose'),
-    createError = require('http-errors'),
     path = require('path'),
     indexRouter = require('./routes/index'),
     bodyParser = require('body-parser'),
@@ -22,16 +20,6 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(express.static('public'));
-
-// JobApplication.create({company: 'test', jobTitle: 'Test Position', status: "Submitted"},
-//     function (err, jobApplication) {
-//         if (err) return new Error(err);
-//     });
-
-// JobApplication.findOne({}).exec(function (err, jobApplications) {
-//     if (err) createError(err);
-//     console.log(jobApplications.jobTitle);
-// });
 
 const myLogger = function (req, res, next) {
     console.log("Request IP: " + req.ip);

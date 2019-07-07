@@ -10,8 +10,14 @@ $(document).ready(function () {
         let currentStatus = status.html();
         let statusDropDown = $("#status_dropdown_div_" + id);
         let editButton = $("#edit_" + id);
-        company.replaceWith("<input type='text' name='company' placeholder='" + currentCompany + "' value='" + currentCompany + "'>");
-        jobTitle.replaceWith("<input type='text' name='jobTitle' placeholder='" + currentJobTitle + "' value='" + currentJobTitle + "'>");
+        let submittedDate = $("#submittedDate_" + id);
+        let currentDate = submittedDate.html();
+        company.replaceWith("<input type='text' name='company' placeholder='"
+            + currentCompany + "' value='" + currentCompany + "'>");
+        jobTitle.replaceWith("<input type='text' name='jobTitle' placeholder='"
+            + currentJobTitle + "' value='" + currentJobTitle + "'>");
+        submittedDate.replaceWith("<input type='date' name='submittedDate' value='"
+            + currentDate + "'>");
         status.hide();
         statusDropDown.toggleClass("hideDropdown");
         console.log(currentStatus);

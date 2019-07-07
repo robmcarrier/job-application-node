@@ -18,6 +18,7 @@
             <div class="tr">
                 <div class="td">Company</div>
                 <div class="td">Job Title</div>
+                <div class="td">Submitted Date</div>
                 <div class="td">Status</div>
                 <div class="td"></div>
                 <div class="td"></div>
@@ -30,6 +31,9 @@
                     </div>
                     <div class="td"><p
                                 id="jobTitle_<%= jobApplications[i]._id %>"><%= jobApplications[i].jobTitle %></p></div>
+                    <div class="td">
+                        <p id="submittedDate_<%= jobApplications[i]._id %>"><%= jobApplications[i].formattedDate%></p>
+                    </div>
                     <input type="hidden" id="custId" name="_id" value="<%= jobApplications[i]._id%>">
                     <div class="td">
                         <div id="status_<%= jobApplications[i]._id %>"><%= jobApplications[i].status %></div>

@@ -2,11 +2,10 @@ var express = require('express');
 var router = express.Router();
 var JobApplication = require('../models/jobApplication');
 
-const testValues = [{text: "Hi", user: "Test guy"}, {text: "no", user: "Test guy 2"}];
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-    JobApplication.find({}, function (err, jobApplications) {
+    JobApplication.find({}).sort({submittedDate: -1}).exec(function (err, jobApplications) {
         if (err) {
             console.log(err);
         } else {
@@ -18,7 +17,12 @@ router.get('/', function (req, res, next) {
 });
 
 router.post('/new', function (req, res) {
-    JobApplication.create({company: req.body.company, jobTitle: req.body.jobTitle, status: 'Submitted'},
+    JobApplication.create(
+        {company: req.body.company,
+            jobTitle: req.body.jobTitle,
+            status: 'Submitted',
+            submittedDate: req.body.submittedDate,
+        },
         function (err, jobApplication) {
             if (err) return new Error(err);
             res.redirect('/');
@@ -32,13 +36,12 @@ router.post('/edit', function (req, res) {
         {
             company: req.body.company,
             jobTitle: req.body.jobTitle,
-            status: req.body.status
+            status: req.body.status,
+            submittedDate: req.body.submittedDate
         }, {upsert:true}, function (err, jobApplication) {
             if (err) return new Error(err);
             res.redirect('/');
         });
 });
-
-router
 
 module.exports = router;
