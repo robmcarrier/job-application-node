@@ -13,8 +13,8 @@ router.get('/', function (req, res, next) {
             let declinedArray = [];
             for (let i = 0; i < jobApplications.length; i++) {
                 jobApplications[i].status === "Replied - Declined" ? declinedArray.push(jobApplications[i]) : jobAppArray.push(jobApplications[i]);
+
             }
-            console.log(declinedArray);
             jobApplications = jobAppArray.concat(declinedArray);
             res.render('pages/index', {
                 jobApplications: jobApplications

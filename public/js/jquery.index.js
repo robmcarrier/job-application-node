@@ -11,7 +11,8 @@ $(document).ready(function () {
         let statusDropDown = $("#status_dropdown_div_" + id);
         let editButton = $("#edit_" + id);
         let submittedDate = $("#submittedDate_" + id);
-        let currentDate = submittedDate.html();
+        let currentDate = submittedDate.html().split("/");
+        currentDate = currentDate[2] + "-" + currentDate[0] +  "-" + currentDate[1];
         company.replaceWith("<input type='text' name='company' placeholder='"
             + currentCompany + "' value='" + currentCompany + "'>");
         jobTitle.replaceWith("<input type='text' name='jobTitle' placeholder='"
@@ -20,7 +21,6 @@ $(document).ready(function () {
             + currentDate + "'>");
         status.hide();
         statusDropDown.toggleClass("hideDropdown");
-        console.log(currentStatus);
         $("#status_dropdown_" + id).val(currentStatus);
         statusDropDown.val(currentStatus);
         editButton.toggleClass("hideDropdown");
